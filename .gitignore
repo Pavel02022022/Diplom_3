@@ -1,4 +1,4 @@
-target/
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -36,3 +36,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/target/maven-status
+/target/test-classes
+/.allure/allure-2.15.0
+/target/surefire-reports
+/target/classes
+.idea/misc.xml
+.idea/vcs.xml
