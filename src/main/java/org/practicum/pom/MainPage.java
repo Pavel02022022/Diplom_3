@@ -17,23 +17,18 @@ public class MainPage {
     //Кнопка Личный кабинет
     private  By personalAccountButton = By.xpath(".//p[contains(text(), 'Личный Кабинет')]");
     //Кнопка Конструктор
-    private By сonstructor= By.xpath(".//p[text()='Конструктор']");
+    private By constructor= By.xpath(".//p[text()='Конструктор']");
     // Логотип Stellar Burgers
     private By logo = By.xpath(".//div[@class = 'AppHeader_header__logo__2D0X2']");
     // Панель выбора булок
     private By bunsSelector = By.xpath(".//span[text()='Булки']//parent::div");
-    // Первая булка
-    private By fluorescentBun = By.xpath(".//p[contains(text(), 'Флюоресцентная булка R2-D3')]");
-    // Первый соус
-    private By spicyxSauce = By.xpath(".//p[contains(text(), 'Соус Spicy-X')]");
-    // Первая начинка
-    private By protostomiaFilling = By.xpath(".//p[contains(text(), 'Мясо бессмертных моллюсков Protostomia')]");
     // Панель выбора соусов
     private By saucesSelector = By.xpath(".//span[text()='Соусы']//parent::div");
     // Панель выбора начинок
     private By fillingsSelector = By.xpath(".//span[text()='Начинки']//parent::div");
-    // Блокитрующий элемент
-    private By block = By.cssSelector("div[style='display: flex;']");
+    // Активная вкладка в конструкторе
+    private final By activeSelector = By.xpath(".//div[contains(@class, 'current')]");
+
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -54,7 +49,7 @@ public class MainPage {
 
     @Step("Constructor and logo is displayed")
     public boolean constructorAndLogoIsDisplayed(){
-        return (driver.findElement(сonstructor).isDisplayed() && driver.findElement(logo).isDisplayed());
+        return (driver.findElement(constructor).isDisplayed() && driver.findElement(logo).isDisplayed());
 
     }
     @Step("Wait for element")
@@ -72,10 +67,10 @@ public class MainPage {
 
     @Step("Buns selector click")
     public MainPage bunsSelectorClick() {
-        driver.findElement(block).click();
         driver.findElement(bunsSelector).click();
         return this;
     }
+
     @Step("Sauces selector click")
     public MainPage saucesSelectorClick() {
         driver.findElement(saucesSelector).click();
@@ -83,29 +78,21 @@ public class MainPage {
     }
     @Step("Fillings selector click")
     public void fillingsSelectorClick() {
-        driver.findElement(block).click();
         driver.findElement(fillingsSelector).click();
     }
-    @Step("Fluorescent bun should be visible")
-    public boolean fluorescentBunShouldBeVisible(){
-        waitForElement(fluorescentBun);
-        return driver.findElement(fluorescentBun).isDisplayed();
+    @Step("Buns selected")
+    public boolean isBunsSelected() {
+        return driver.findElement(bunsSelector).getText()
+                .equals(driver.findElement(activeSelector).getText());
     }
-    @Step("Spicy-X  Sauseshould be visible")
-    public boolean spicyxSauceShouldBeVisible(){
-        waitForElement(spicyxSauce);
-        return driver.findElement(spicyxSauce).isDisplayed();
+    @Step("Buns selected")
+    public boolean isSaucesSelected() {
+        return driver.findElement(saucesSelector).getText()
+                .equals(driver.findElement(activeSelector).getText());
     }
-    @Step("Protostomia filling should be visible")
-    public boolean protostomiaFillingShouldBeVisible(){
-        waitForElement(personalAccountButton);
-        return driver.findElement(protostomiaFilling).isEnabled();
+    @Step("Buns selected")
+    public boolean isFillingSelected() {
+        return driver.findElement(fillingsSelector).getText()
+                .equals(driver.findElement(activeSelector).getText());
     }
-
-
-
-
-
-
-
 }

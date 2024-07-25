@@ -43,3 +43,4 @@ build/
 /target/classes
 .idea/misc.xml
 .idea/vcs.xml
+.idea/encodings.xml

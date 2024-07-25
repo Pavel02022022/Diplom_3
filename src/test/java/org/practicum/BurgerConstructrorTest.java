@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.practicum.pom.MainPage;
 
@@ -34,8 +35,9 @@ public class BurgerConstructrorTest {
     @Description("Переходы к разделу «Булки» на главной странице, проверка видимости булки")
     public void clickBunsSelector() {
         MainPage mainPage = new MainPage(driver);
+        mainPage.saucesSelectorClick();
         mainPage.bunsSelectorClick();
-        Assert.assertNotNull("Раздел 'Булки' не виден", mainPage.fluorescentBunShouldBeVisible());
+        Assert.assertTrue(mainPage.isBunsSelected());
     }
 
     @Test
@@ -44,16 +46,16 @@ public class BurgerConstructrorTest {
     public void clickSaucesSelector() {
         MainPage mainPage = new MainPage(driver);
         mainPage.saucesSelectorClick();
-        Assert.assertNotNull("Раздел 'Соусы' не виден", mainPage.spicyxSauceShouldBeVisible());
+        Assert.assertTrue(mainPage.isSaucesSelected());
     }
 
     @Test
     @DisplayName("Переходы к разделу «Начинки»")
-    @Description("Переходы к разделу «Начинки» на главной странице, , проверка видимости начиник")
+    @Description("Переходы к разделу «Начинки» на главной странице, проверка видимости начиник")
     public void clickFillingsSelector() {
         MainPage mainPage = new MainPage(driver);
         mainPage.fillingsSelectorClick();
-        Assert.assertNotNull("Раздел 'Начинки' не виден", mainPage.protostomiaFillingShouldBeVisible());
+        Assert.assertTrue(mainPage.isFillingSelected());
     }
 
 }
